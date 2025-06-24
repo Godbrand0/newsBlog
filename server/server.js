@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
-const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/authRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -13,9 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use("/api/posts", postRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
