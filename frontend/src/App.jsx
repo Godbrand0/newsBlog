@@ -6,10 +6,10 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <BrowserRouter>
         <Navbar />
-        <div className="max-w-[1400px] p-5 mx-auto">
+        <div className="max-w-[1400px] p-5 mx-auto flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
