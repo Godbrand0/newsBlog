@@ -2,10 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
 const adminRoutes = require("./routes/authRoutes");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -13,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/posts", postRoutes);
+app.use("/api/posts", require("./routes/postRoutes"));
 app.use("/api/admin", adminRoutes);
 
 mongoose
