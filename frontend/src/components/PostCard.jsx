@@ -9,8 +9,18 @@ export default function PostCard({ post }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes || 0);
 
+  useEffect(() => {
+    const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+
+    if (likedPosts.includes(post._id)) {
+      setLiked(true);
+    }
+  }, [post._id]);
+
   const handleLike = async () => {
-    if (liked) return;
+    if (liked) {
+      return;
+    }
 
     try {
       const res = await axios.patch(
@@ -18,6 +28,11 @@ export default function PostCard({ post }) {
       );
       setLikes(res.data.likes);
       setLiked(true);
+
+      // save to localstorage
+      const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+      likedPosts.push(post._id);
+      localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
     } catch (error) {
       console.error("error liking post:", error.message);
     }
@@ -45,18 +60,17 @@ export default function PostCard({ post }) {
             Read more
           </Link>
           <button
-            className={`flex items-center gap-1 ${
-              liked ? "text-red-500" : "text-gray-400"
-            }hover:text-red-600 transition`}
+            onClick={handleLike}
+            disabled={liked}
+            className="flex items-center gap-1 cursor-pointer"
           >
             {liked ? (
-              <FaHeart size={16} />
-            ) : (
-              <FaRegHeart
+              <FaHeart
                 size={16}
-                onClick={handleLike}
-                className="cursor-pointer"
+                className="text-red-500 hover:text-red-600 transition"
               />
+            ) : (
+              <FaRegHeart size={16} className="text-gray-400" />
             )}
             <span className="text-sm">{likes}</span>
           </button>
