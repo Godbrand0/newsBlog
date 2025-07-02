@@ -54,7 +54,7 @@ export default function PostCard({ post }) {
         <p className="text-gray-600 mb-4 line-clamp-3">{post.snippet}</p>
         <div className="flex items-center justify-between">
           <Link
-            to={`/post/${post.id}`}
+            to={`/post/${post._id}`}
             className="text-blue-600 font-medium hover:underline"
           >
             Read more

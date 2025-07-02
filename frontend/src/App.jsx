@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AdminDashboard from "./admin/AdminDashboard";
 import CreatePost from "./admin/CreatePost";
+import SinglePost from "./pages/SinglePost";
 
 export default function App() {
   return (
@@ -20,6 +21,9 @@ export default function App() {
           </Routes>
           <Routes>
             <Route path="/admin/create" element={<CreatePost />} />
+          </Routes>
+          <Routes>
+            <Route path="/post/:id" element={<SinglePost />} />
           </Routes>
         </div>
         <Footer />
