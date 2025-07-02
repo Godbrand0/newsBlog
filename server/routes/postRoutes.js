@@ -1,4 +1,8 @@
 const express = require("express");
+const multer = require("multer");
+
+const { storage } = require("../utils/cloudinary");
+const upload = multer({ storage });
 const {
   createPost,
   getPosts,
@@ -15,8 +19,8 @@ router.get("/", getPosts);
 
 router.get("/:id", validateObjectId, getPostById);
 
-router.post("/", createPost);
-router.put("/:id", validateObjectId, updatePost);
+router.post("/", upload.array("images"), createPost);
+router.put("/:id", validateObjectId, upload.array("images"), updatePost);
 router.delete("/:id", validateObjectId, deletePost);
 router.patch("/:id/like", validateObjectId, addLike);
 

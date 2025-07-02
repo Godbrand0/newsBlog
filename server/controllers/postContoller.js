@@ -23,11 +23,19 @@ const getPostById = async (req, res) => {
 
 // create new post
 const createPost = async (req, res) => {
-  const { title, snippet, content, images, likes } = req.body;
   try {
-    const post = await Post.create({ title, snippet, content, images, likes });
-    res.status(200).json(post);
+    const { title, snippet, content, likes } = req.body;
+    const imageUrls = req.files.map((file) => file.path);
+    const newPost = await Post.create({
+      title,
+      snippet,
+      content,
+      images: imageUrls,
+      likes,
+    });
+    res.status(200).json(newPost);
   } catch (error) {
+    console.error("Error creating post:", error);
     res.status(400).json({ error: error.message });
   }
 };
