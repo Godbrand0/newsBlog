@@ -1,10 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
 const adminRoutes = require("./routes/authRoutes");
 const cors = require("cors");
 const path = require("path");
-require("dotenv").config();
+
 
 const cloudinary = require("cloudinary").v2;
 
