@@ -17,7 +17,7 @@ cloudinary.config({
 });
 
 const app = express();
-console.log(`.env file = ${[process.env]}`)
+console.log(`.env file = ${process.env.MONGO}`)
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +37,7 @@ app.use("/api/posts", require("./routes/postRoutes"));
 app.use("/api/admin", adminRoutes);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO)
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log(`Server is running on port ${process.env.PORT}`);
