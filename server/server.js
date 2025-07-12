@@ -17,7 +17,7 @@ cloudinary.config({
 });
 
 const app = express();
-console.log(`.env file = ${process.env}`)
+console.log(`.env file = ${[process.env]}`)
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
