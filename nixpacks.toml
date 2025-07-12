@@ -3,14 +3,14 @@ nixPkgs = ["nodejs"]
 
 [phases.install]
 cmds = [
-  "cd frontend && npm install",
-  "cd ../server && npm install"
+  "npm --prefix frontend install",
+  "npm --prefix server install"
 ]
 
 [phases.build]
 cmds = [
-  "cd frontend && npm run build"
+  "npm --prefix frontend run build"
 ]
 
 [start]
-cmd = "cd server && npm start"
+cmd = "npm --prefix server start"
